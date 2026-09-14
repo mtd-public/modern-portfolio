@@ -1,0 +1,217 @@
+export const profile = {
+  name: 'Michael Taddeucci',
+  title: 'Senior UI/UX Developer',
+  location: 'Grand Rapids, Michigan',
+  email: 'mtaddevi@gmail.com',
+  linkedin: 'https://www.linkedin.com/in/michael-taddeucci-0ab10b14a/',
+  github: 'https://github.com/',
+  about: `As a Senior UI/UX Developer, I collaborate with designers, product managers, and stakeholders to create and demonstrate functional prototypes that aid in design exploration, usability research, and stakeholder buy-in. I have over four years of professional experience in web development, with a focus on frontend technologies and user interface design.
+
+I use Figma, React, HTML, CSS, and other web tools to deliver high-quality and responsive web solutions that meet the needs and expectations of my clients and users. I also take the lead on projects and planning, research new frameworks and toolkits, mentor other team members, and review designs for technical feasibility. I enjoy solving complex problems, learning new skills, and creating engaging and intuitive user experiences.`,
+}
+
+export const skills = [
+  'React.js',
+  'JavaScript',
+  'HTML5 & CSS3',
+  'Figma',
+  'UI/UX Design',
+  'Responsive Design',
+  'Azure DevOps Services',
+  'PHP',
+  'Bootstrap',
+  'REST API Integration',
+  'Usability Research',
+  'Mentoring & Code Review',
+]
+
+// Color themes used to brand each employer's card + detail modal.
+// Add a new theme here, then reference its key from an experience entry's `theme` field.
+export const themes = {
+  msu: {
+    primary: '#18453b',
+    primaryDark: '#123a31',
+    accent: '#5bd68a',
+    badgeBg: '#e7f2ec',
+    badgeText: '#123a31',
+  },
+  bmi: {
+    primary: '#1a56c4',
+    primaryDark: '#153f8f',
+    accent: '#f2b705',
+    badgeBg: '#eaf1ff',
+    badgeText: '#153f8f',
+  },
+  caddo: {
+    primary: '#c1272d',
+    primaryDark: '#8f1c21',
+    accent: '#f2b705',
+    badgeBg: '#fdeceb',
+    badgeText: '#8f1c21',
+  },
+  leviathan: {
+    primary: '#1197b0',
+    primaryDark: '#0c7186',
+    accent: '#c99a3d',
+    badgeBg: '#e7f6f8',
+    badgeText: '#0c7186',
+  },
+  default: {
+    primary: '#191333',
+    primaryDark: '#100c22',
+    accent: '#c99a3d',
+    badgeBg: '#f3efe3',
+    badgeText: '#191333',
+  },
+}
+
+// Each entry drives both the experience card and its detail modal.
+// To add a role: append an object with this shape. `categories` feeds the
+// filter pills; `theme` must match a key in `themes` above; `icon` must
+// match a key exported from components/icons.jsx.
+export const experience = [
+  {
+    id: 'msu-it2',
+    company: 'Michigan State University',
+    role: 'Information Technologist II',
+    period: 'May 2025 - Present',
+    duration: '1 yr 5 mos',
+    location: 'Lansing, Michigan',
+    current: true,
+    categories: ['frontend'],
+    theme: 'msu',
+    icon: 'graduationCap',
+    description:
+      "Supporting departmental systems and end users within the university's IT organization, bringing frontend and UX rigor from prior product roles into higher-ed infrastructure and tooling.",
+    bullets: [],
+  },
+  {
+    id: 'bmi-senior-frontend',
+    company: 'BMI Audit Services',
+    role: 'Senior Frontend Developer',
+    period: 'Jan 2022 - Apr 2025',
+    duration: '3 yrs 4 mos',
+    location: 'South Bend-Mishawaka Region · Remote',
+    categories: ['frontend', 'design'],
+    theme: 'bmi',
+    icon: 'shieldCheck',
+    bullets: [
+      'Collaborated with designers, product managers, and stakeholders to build and demonstrate functional prototypes that aid in design exploration, usability research, and stakeholder buy-in.',
+      'Took lead on projects and planning, and researched new frameworks and toolkits to increase code production efficiency.',
+      'Mentored other members of the team, interns, and backend developers on best practices for UI/UX development within the ReactJS framework.',
+      'Reviewed designs produced in Figma for technical feasibility.',
+      'Structured and consumed complex APIs suited to internal, legacy systems and operations for parallel use within a new product system.',
+    ],
+  },
+  {
+    id: 'caddo-frontend-ba',
+    company: 'Caddo Connections',
+    role: 'Frontend Developer & Business Analyst',
+    period: 'Jan 2020 - Dec 2021',
+    duration: '2 yrs',
+    location: 'La Porte, Indiana',
+    categories: ['frontend', 'analysis'],
+    theme: 'caddo',
+    icon: 'network',
+    bullets: [
+      'Developed a complete mobile-first, responsive redesign of a static company website, featuring parallax image scrolling, custom animations, animate-on-scroll behavior, and Google Maps integration with unique map styling.',
+      'Adapted the website to better communicate COVID-19 pandemic-related information, including a dedicated response page and an improved Contact page for prompt client communication.',
+      'Produced high-quality reports and materials for management and clients, and verified sensitive data materials for customer shipments.',
+    ],
+  },
+  {
+    id: 'leviathan-web',
+    company: 'Leviathan Soft LLC',
+    role: 'Web Designer & Programmer',
+    period: 'Aug 2018 - Jan 2020',
+    duration: '1 yr 6 mos',
+    location: 'LaPorte, IN',
+    categories: ['frontend', 'design'],
+    theme: 'leviathan',
+    icon: 'codeBrackets',
+    bullets: [
+      'Developed client webpages using HTML, CSS, JavaScript, PHP, Bootstrap, and other web technologies.',
+      'Developed prototype mobile machine learning applications for a client.',
+      'Communicated with clients to determine business needs, requirements, and design imperatives for their sites.',
+      'Developed custom web solutions and designs that satisfied clients, refining initial designs based on client feedback.',
+    ],
+  },
+  {
+    id: 'caddo-ba-2017',
+    company: 'Caddo Connections',
+    role: 'Business Analyst',
+    period: 'May 2017 - Aug 2017',
+    duration: '4 mos (Summer Position)',
+    location: 'La Porte, Indiana',
+    categories: ['analysis'],
+    theme: 'caddo',
+    icon: 'network',
+    bullets: [
+      'Uncovered client needs through communication and offered value-added products and solutions appropriate for their operations.',
+      'Analyzed client manufacturing blueprints to produce itemized breakdowns of components needed to be built/produced on behalf of the account manager.',
+    ],
+  },
+  {
+    id: 'caddo-ba-2016',
+    company: 'Caddo Connections',
+    role: 'Business Analyst',
+    period: 'May 2016 - Aug 2016',
+    duration: '4 mos (Summer Position)',
+    location: 'La Porte, Indiana',
+    categories: ['analysis'],
+    theme: 'caddo',
+    icon: 'network',
+    bullets: [
+      'Uncovered client needs through communication and offered value-added products and solutions appropriate for their operations.',
+      'Analyzed client manufacturing blueprints to produce itemized breakdowns of components needed to be built/produced on behalf of the account manager.',
+    ],
+  },
+  {
+    id: 'caddo-qa-2015',
+    company: 'Caddo Connections',
+    role: 'Quality Assurance Technician',
+    period: 'May 2015 - Aug 2015',
+    duration: '4 mos (Summer Position)',
+    location: 'La Porte, Indiana',
+    categories: ['analysis'],
+    theme: 'caddo',
+    icon: 'checkBadge',
+    bullets: [
+      'Ensured full compliance to customer specification by performing First Article Inspection (FAI).',
+      'Performed initial and continuous conformance testing, and reduced inspection time by 29% by automating continuous conformance testing.',
+      'Developed a program for tracking nonconforming parts.',
+    ],
+  },
+  {
+    id: 'caddo-qa-2014',
+    company: 'Caddo Connections',
+    role: 'Quality Assurance Technician',
+    period: 'May 2014 - Aug 2014',
+    duration: '4 mos (Summer Position)',
+    location: 'LaPorte, IN',
+    categories: ['analysis'],
+    theme: 'caddo',
+    icon: 'checkBadge',
+    bullets: [
+      'Ensured full compliance to customer specification by performing First Article Inspection (FAI).',
+      'Performed initial and continuous conformance testing, and reduced inspection time by 29% by automating continuous conformance testing.',
+      'Developed a program for tracking nonconforming parts.',
+    ],
+  },
+  {
+    id: 'caddo-qa-2013',
+    company: 'Caddo Connections',
+    role: 'Quality Assurance Technician',
+    period: 'May 2013 - Aug 2013',
+    duration: '4 mos (Summer Position)',
+    location: 'LaPorte, IN',
+    categories: ['analysis'],
+    theme: 'caddo',
+    icon: 'checkBadge',
+    bullets: [
+      'Ensured full compliance to customer specification by performing First Article Inspection (FAI).',
+      'Performed initial and continuous conformance testing, and reduced inspection time by 29% by automating continuous conformance testing.',
+      'Developed a program for tracking nonconforming parts.',
+    ],
+  },
+]
