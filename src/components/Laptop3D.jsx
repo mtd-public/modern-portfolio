@@ -12,7 +12,7 @@ const SPIN_SCROLL_DISTANCE = 900
 export default function Laptop3D() {
   const shouldReduceMotion = useReducedMotion()
   const { scrollY } = useScroll()
-  const scrollRotate = useTransform(scrollY, [0, SPIN_SCROLL_DISTANCE], [0, 360])
+  const scrollRotate = useTransform(scrollY, [0, SPIN_SCROLL_DISTANCE], [0, -360])
   const rotateY = shouldReduceMotion ? 22 : scrollRotate
 
   return (
