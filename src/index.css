@@ -18,6 +18,17 @@
   box-sizing: border-box;
 }
 
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  transform-origin: 0% 50%;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-strong));
+  z-index: 60;
+}
+
 html {
   scroll-behavior: smooth;
 }
