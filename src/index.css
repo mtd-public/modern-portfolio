@@ -527,10 +527,35 @@ a:hover {
 
 .contact__texture {
   flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: #cba55c;
+}
+
+.contact__texture-drift {
+  position: absolute;
+  inset: -12%;
   background: radial-gradient(circle at 30% 20%, #d9b25c 0%, #d9b25c 18%, transparent 19%),
     radial-gradient(circle at 65% 55%, #40382a 0%, #40382a 22%, transparent 23%),
     repeating-radial-gradient(circle at 30% 20%, transparent 0 26px, rgba(64, 56, 42, 0.12) 26px 28px),
-    repeating-radial-gradient(circle at 65% 55%, transparent 0 30px, rgba(64, 56, 42, 0.14) 30px 32px), #cba55c;
+    repeating-radial-gradient(circle at 65% 55%, transparent 0 30px, rgba(64, 56, 42, 0.14) 30px 32px);
+  transform-origin: 50% 50%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .contact__texture-drift {
+    animation: contact-texture-drift 16s ease-in-out infinite;
+  }
+}
+
+@keyframes contact-texture-drift {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.08) rotate(2deg) translate(-1.5%, 1.5%);
+  }
 }
 
 .contact__panel {
