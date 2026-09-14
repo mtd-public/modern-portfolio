@@ -1,11 +1,14 @@
+import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import { profile } from '../data.js'
 import { fadeUp, viewportOnce } from '../motion.js'
 import Laptop3D from './Laptop3D.jsx'
 
 export default function About() {
+  const sectionRef = useRef(null)
+
   return (
-    <section id="about" className="section about">
+    <section id="about" className="section about" ref={sectionRef}>
       <div className="container about__inner">
         <div className="about__copy">
           <motion.h2
@@ -31,7 +34,7 @@ export default function About() {
           </motion.div>
         </div>
         <div className="about__graphic-wrap" aria-hidden="true">
-          <Laptop3D />
+          <Laptop3D targetRef={sectionRef} />
         </div>
       </div>
     </section>
