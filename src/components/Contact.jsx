@@ -14,6 +14,20 @@ export default function Contact() {
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className="contact__texture-drift" />
+        <motion.div
+          className="contact__circle contact__circle--gold"
+          initial={{ opacity: 0, scale: 0.35, x: -60, y: -40 }}
+          whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+          viewport={viewportOnce}
+          transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+        />
+        <motion.div
+          className="contact__circle contact__circle--black"
+          initial={{ opacity: 0, scale: 0.35, x: 70, y: 50 }}
+          whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+          viewport={viewportOnce}
+          transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        />
       </motion.div>
       <motion.div
         className="contact__panel"
