@@ -7,7 +7,7 @@ import { fadeUp, viewportOnce } from '../motion.js'
 
 const filters = [
   { id: 'all', label: 'All' },
-  { id: 'frontend', label: 'Frontend' },
+  { id: 'frontend', label: 'Dev' },
   { id: 'design', label: 'Design' },
   { id: 'analysis', label: 'Analysis' },
 ]
