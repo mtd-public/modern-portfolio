@@ -5,12 +5,10 @@ import Skills from './components/Skills.jsx'
 import Experience from './components/Experience.jsx'
 import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
-import ScrollProgress from './components/ScrollProgress.jsx'
 
 function App() {
   return (
     <>
-      <ScrollProgress />
       <Header />
       <main>
         <Hero />

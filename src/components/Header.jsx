@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { profile } from '../data.js'
 import { GithubIcon, MailIcon, MenuIcon, CloseIcon } from './icons.jsx'
+import ScrollProgress from './ScrollProgress.jsx'
 
 const links = [
   { href: '#about', label: 'About' },
@@ -61,6 +62,8 @@ export default function Header() {
           <MailIcon size={18} /> {profile.email}
         </a>
       </nav>
+
+      <ScrollProgress />
     </header>
   )
 }
