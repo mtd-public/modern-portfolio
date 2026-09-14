@@ -534,17 +534,15 @@ a:hover {
 
 .contact__texture-drift {
   position: absolute;
-  inset: -12%;
-  background: radial-gradient(circle at 30% 20%, #d9b25c 0%, #d9b25c 18%, transparent 19%),
-    radial-gradient(circle at 65% 55%, #40382a 0%, #40382a 22%, transparent 23%),
-    repeating-radial-gradient(circle at 30% 20%, transparent 0 26px, rgba(64, 56, 42, 0.12) 26px 28px),
-    repeating-radial-gradient(circle at 65% 55%, transparent 0 30px, rgba(64, 56, 42, 0.14) 30px 32px);
+  inset: -25%;
+  background: repeating-radial-gradient(circle at 30% 20%, transparent 0 26px, rgba(64, 56, 42, 0.2) 26px 28px),
+    repeating-radial-gradient(circle at 65% 55%, transparent 0 30px, rgba(64, 56, 42, 0.24) 30px 32px);
   transform-origin: 50% 50%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .contact__texture-drift {
-    animation: contact-texture-drift 16s ease-in-out infinite;
+    animation: contact-texture-drift 9s ease-in-out infinite;
   }
 }
 
@@ -554,8 +552,31 @@ a:hover {
     transform: scale(1) rotate(0deg) translate(0, 0);
   }
   50% {
-    transform: scale(1.08) rotate(2deg) translate(-1.5%, 1.5%);
+    transform: scale(1.22) rotate(5deg) translate(-4%, 4%);
   }
+}
+
+.contact__circle {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.contact__circle--gold {
+  left: 30%;
+  top: 20%;
+  width: 220px;
+  height: 220px;
+  margin: -110px 0 0 -110px;
+  background: #d9b25c;
+}
+
+.contact__circle--black {
+  left: 65%;
+  top: 55%;
+  width: 260px;
+  height: 260px;
+  margin: -130px 0 0 -130px;
+  background: #40382a;
 }
 
 .contact__panel {
@@ -632,7 +653,19 @@ a:hover {
   }
 
   .contact__texture {
-    min-height: 200px;
+    min-height: 220px;
+  }
+
+  .contact__circle--gold {
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+  }
+
+  .contact__circle--black {
+    width: 180px;
+    height: 180px;
+    margin: -90px 0 0 -90px;
   }
 
   .contact__panel {
