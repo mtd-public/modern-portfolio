@@ -1,4 +1,5 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { profile } from '../data.js'
 
 function HeroGraphic() {
@@ -33,12 +34,27 @@ function HeroGraphic() {
   )
 }
 
+const IDLE_DELAY = 200
+
 export default function Hero() {
-  // Scroll-linked parallax lives on its own inner element so it never fights
-  // with the entrance animation's own transform/opacity on mount.
+  // Scroll-linked parallax and the idle float each live on their own inner
+  // element so they never fight each other's transform, or the entrance
+  // animation's transform/opacity on mount.
   const { scrollY } = useScroll()
   const graphicY = useTransform(scrollY, [0, 600], [0, -70])
   const graphicRotate = useTransform(scrollY, [0, 600], [0, -4])
+
+  const shouldReduceMotion = useReducedMotion()
+  const [isIdle, setIsIdle] = useState(true)
+  const idleTimeout = useRef(null)
+
+  useMotionValueEvent(scrollY, 'change', () => {
+    setIsIdle(false)
+    clearTimeout(idleTimeout.current)
+    idleTimeout.current = setTimeout(() => setIsIdle(true), IDLE_DELAY)
+  })
+
+  useEffect(() => () => clearTimeout(idleTimeout.current), [])
 
   return (
     <section id="top" className="hero">
@@ -73,7 +89,16 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
         >
           <motion.div style={{ y: graphicY, rotate: graphicRotate }}>
-            <HeroGraphic />
+            <motion.div
+              animate={isIdle && !shouldReduceMotion ? { y: [0, -10, 0] } : { y: 0 }}
+              transition={
+                isIdle && !shouldReduceMotion
+                  ? { duration: 2.6, repeat: Infinity, ease: 'easeInOut' }
+                  : { duration: 0.4, ease: 'easeOut' }
+              }
+            >
+              <HeroGraphic />
+            </motion.div>
           </motion.div>
         </motion.div>
       </div>
