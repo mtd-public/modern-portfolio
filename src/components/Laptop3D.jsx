@@ -3,6 +3,10 @@ import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion
 import DigitalRain from './DigitalRain.jsx'
 
 const MIN_SPIN_SCROLL_DISTANCE = 200
+// Rest/reduced-motion pose: open-faced but angled slightly left rather than
+// flat-on, so its 3D depth reads immediately and the full turn between here
+// and the About-centered pose is visible as the user scrolls.
+const START_ANGLE = 24
 
 export default function Laptop3D({ targetRef }) {
   const shouldReduceMotion = useReducedMotion()
@@ -44,9 +48,9 @@ export default function Laptop3D({ targetRef }) {
   // and won't pick up centerScrollY after the measurement effect updates it.
   const scrollRotate = useTransform(scrollY, (latest) => {
     const progress = Math.min(1, Math.max(0, latest / centerScrollY))
-    return progress * -360
+    return START_ANGLE + progress * -360
   })
-  const rotateY = shouldReduceMotion ? 22 : scrollRotate
+  const rotateY = shouldReduceMotion ? START_ANGLE : scrollRotate
 
   return (
     <div className="laptop3d-scene">
