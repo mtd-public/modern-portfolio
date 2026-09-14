@@ -1,33 +1,93 @@
-import { experience } from '../data.js'
+import { useState } from 'react'
+import { experience, themes } from '../data.js'
+import { ChevronRightIcon, iconMap } from './icons.jsx'
+import JobModal from './JobModal.jsx'
+
+const filters = [
+  { id: 'all', label: 'All' },
+  { id: 'frontend', label: 'Frontend' },
+  { id: 'design', label: 'Design' },
+  { id: 'analysis', label: 'Analysis' },
+]
+
+const VISIBLE_COUNT = 4
 
 export default function Experience() {
+  const [activeFilter, setActiveFilter] = useState('all')
+  const [expanded, setExpanded] = useState(false)
+  const [selectedJob, setSelectedJob] = useState(null)
+
+  const filteredJobs =
+    activeFilter === 'all' ? experience : experience.filter((job) => job.categories.includes(activeFilter))
+  const displayedJobs = expanded ? filteredJobs : filteredJobs.slice(0, VISIBLE_COUNT)
+  const hiddenCount = filteredJobs.length - displayedJobs.length
+
+  function selectFilter(id) {
+    setActiveFilter(id)
+    setExpanded(false)
+  }
+
   return (
     <section id="experience" className="section experience">
       <div className="container">
-        <h2 className="section__heading">Experience</h2>
-        <ol className="timeline">
-          {experience.map((job, idx) => (
-            <li className="timeline__item" key={`${job.company}-${job.period}-${idx}`}>
-              <div className="timeline__marker" aria-hidden="true" />
-              <div className="timeline__content">
-                <h3 className="timeline__role">{job.role}</h3>
-                <p className="timeline__meta">
-                  <span className="timeline__company">{job.company}</span>
-                  <span className="timeline__period">{job.period}</span>
-                </p>
-                {job.location && <p className="timeline__location">{job.location}</p>}
-                {job.bullets.length > 0 && (
-                  <ul className="timeline__bullets">
-                    {job.bullets.map((bullet, i) => (
-                      <li key={i}>{bullet}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            </li>
+        <h2 className="section__heading section__heading--center">Experience</h2>
+
+        <div className="experience__filters">
+          {filters.map((filter) => (
+            <button
+              key={filter.id}
+              className={`experience__filter ${activeFilter === filter.id ? 'is-active' : ''}`}
+              onClick={() => selectFilter(filter.id)}
+            >
+              {filter.label}
+            </button>
           ))}
-        </ol>
+        </div>
+
+        <div className="experience__list">
+          {displayedJobs.map((job) => {
+            const theme = themes[job.theme] ?? themes.default
+            const Icon = iconMap[job.icon]
+            return (
+              <button
+                key={job.id}
+                className="job-card"
+                onClick={() => setSelectedJob(job)}
+                aria-haspopup="dialog"
+              >
+                <span className="job-card__main">
+                  <span className="job-card__icon" style={{ background: theme.primary }}>
+                    {Icon && <Icon size={24} color={theme.accent} />}
+                  </span>
+                  <span className="job-card__text">
+                    <span className="job-card__role">{job.role}</span>
+                    <span className="job-card__meta">
+                      {job.company} · {job.period}
+                    </span>
+                  </span>
+                </span>
+                {job.current && (
+                  <span
+                    className="job-card__tag"
+                    style={{ background: theme.badgeBg, color: theme.badgeText }}
+                  >
+                    CURRENT
+                  </span>
+                )}
+                <ChevronRightIcon size={20} color="#413c56" />
+              </button>
+            )
+          })}
+
+          {(hiddenCount > 0 || expanded) && filteredJobs.length > VISIBLE_COUNT && (
+            <button className="experience__toggle" onClick={() => setExpanded((v) => !v)}>
+              {expanded ? 'Show fewer roles' : `Show ${hiddenCount} earlier roles`}
+            </button>
+          )}
+        </div>
       </div>
+
+      {selectedJob && <JobModal job={selectedJob} onClose={() => setSelectedJob(null)} />}
     </section>
   )
 }
