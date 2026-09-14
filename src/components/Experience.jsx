@@ -1,7 +1,9 @@
 import { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { experience, themes } from '../data.js'
 import { ChevronRightIcon, iconMap } from './icons.jsx'
 import JobModal from './JobModal.jsx'
+import { fadeUp, viewportOnce } from '../motion.js'
 
 const filters = [
   { id: 'all', label: 'All' },
@@ -11,6 +13,13 @@ const filters = [
 ]
 
 const VISIBLE_COUNT = 4
+
+const cardMotion = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -12, transition: { duration: 0.2 } },
+  transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+}
 
 export default function Experience() {
   const [activeFilter, setActiveFilter] = useState('all')
@@ -30,9 +39,23 @@ export default function Experience() {
   return (
     <section id="experience" className="section experience">
       <div className="container">
-        <h2 className="section__heading section__heading--center">Experience</h2>
+        <motion.h2
+          className="section__heading section__heading--center"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+        >
+          Experience
+        </motion.h2>
 
-        <div className="experience__filters">
+        <motion.div
+          className="experience__filters"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+        >
           {filters.map((filter) => (
             <button
               key={filter.id}
@@ -42,52 +65,64 @@ export default function Experience() {
               {filter.label}
             </button>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="experience__list">
-          {displayedJobs.map((job) => {
-            const theme = themes[job.theme] ?? themes.default
-            const Icon = iconMap[job.icon]
-            return (
-              <button
-                key={job.id}
-                className="job-card"
-                onClick={() => setSelectedJob(job)}
-                aria-haspopup="dialog"
-              >
-                <span className="job-card__main">
-                  <span className="job-card__icon" style={{ background: theme.primary }}>
-                    {Icon && <Icon size={24} color={theme.accent} />}
-                  </span>
-                  <span className="job-card__text">
-                    <span className="job-card__role">{job.role}</span>
-                    <span className="job-card__meta">
-                      {job.company} · {job.period}
+        <motion.div
+          className="experience__list"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+        >
+          <AnimatePresence initial={false}>
+            {displayedJobs.map((job) => {
+              const theme = themes[job.theme] ?? themes.default
+              const Icon = iconMap[job.icon]
+              return (
+                <motion.button
+                  key={job.id}
+                  layout
+                  {...cardMotion}
+                  className="job-card"
+                  onClick={() => setSelectedJob(job)}
+                  aria-haspopup="dialog"
+                >
+                  <span className="job-card__main">
+                    <span className="job-card__icon" style={{ background: theme.primary }}>
+                      {Icon && <Icon size={24} color={theme.accent} />}
+                    </span>
+                    <span className="job-card__text">
+                      <span className="job-card__role">{job.role}</span>
+                      <span className="job-card__meta">
+                        {job.company} · {job.period}
+                      </span>
                     </span>
                   </span>
-                </span>
-                {job.current && (
-                  <span
-                    className="job-card__tag"
-                    style={{ background: theme.badgeBg, color: theme.badgeText }}
-                  >
-                    CURRENT
-                  </span>
-                )}
-                <ChevronRightIcon size={20} color="#413c56" />
-              </button>
-            )
-          })}
+                  {job.current && (
+                    <span
+                      className="job-card__tag"
+                      style={{ background: theme.badgeBg, color: theme.badgeText }}
+                    >
+                      CURRENT
+                    </span>
+                  )}
+                  <ChevronRightIcon size={20} color="#413c56" />
+                </motion.button>
+              )
+            })}
+          </AnimatePresence>
 
           {(hiddenCount > 0 || expanded) && filteredJobs.length > VISIBLE_COUNT && (
             <button className="experience__toggle" onClick={() => setExpanded((v) => !v)}>
               {expanded ? 'Show fewer roles' : `Show ${hiddenCount} earlier roles`}
             </button>
           )}
-        </div>
+        </motion.div>
       </div>
 
-      {selectedJob && <JobModal job={selectedJob} onClose={() => setSelectedJob(null)} />}
+      <AnimatePresence>
+        {selectedJob && <JobModal job={selectedJob} onClose={() => setSelectedJob(null)} />}
+      </AnimatePresence>
     </section>
   )
 }

@@ -1,17 +1,33 @@
+import { motion } from 'framer-motion'
 import { skills } from '../data.js'
+import { fadeUp, staggerContainer, staggerItem, viewportOnce } from '../motion.js'
 
 export default function Skills() {
   return (
     <section id="skills" className="section skills">
       <div className="container">
-        <h2 className="section__heading">Skills</h2>
-        <ul className="skills__grid">
+        <motion.h2
+          className="section__heading"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+        >
+          Skills
+        </motion.h2>
+        <motion.ul
+          className="skills__grid"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+        >
           {skills.map((skill) => (
-            <li key={skill} className="skills__item">
+            <motion.li key={skill} className="skills__item" variants={staggerItem}>
               {skill}
-            </li>
+            </motion.li>
           ))}
-        </ul>
+        </motion.ul>
       </div>
     </section>
   )

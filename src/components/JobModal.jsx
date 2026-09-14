@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
+import { motion } from 'framer-motion'
 import { themes } from '../data.js'
 import { CloseIcon, iconMap } from './icons.jsx'
 
@@ -34,13 +35,24 @@ export default function JobModal({ job, onClose }) {
   }
 
   return createPortal(
-    <div className="job-modal-overlay" onClick={handleOverlayClick}>
-      <div
+    <motion.div
+      className="job-modal-overlay"
+      onClick={handleOverlayClick}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+    >
+      <motion.div
         className="job-modal"
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
         style={{ borderColor: theme.primary }}
+        initial={{ opacity: 0, scale: 0.94, y: 18 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.96, y: 10 }}
+        transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
       >
         <button
           ref={closeButtonRef}
@@ -86,8 +98,8 @@ export default function JobModal({ job, onClose }) {
             </ul>
           )}
         </div>
-      </div>
-    </div>,
+      </motion.div>
+    </motion.div>,
     document.body
   )
 }

@@ -1,3 +1,4 @@
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { profile } from '../data.js'
 
 function HeroGraphic() {
@@ -33,10 +34,21 @@ function HeroGraphic() {
 }
 
 export default function Hero() {
+  // Scroll-linked parallax lives on its own inner element so it never fights
+  // with the entrance animation's own transform/opacity on mount.
+  const { scrollY } = useScroll()
+  const graphicY = useTransform(scrollY, [0, 600], [0, -70])
+  const graphicRotate = useTransform(scrollY, [0, 600], [0, -4])
+
   return (
     <section id="top" className="hero">
       <div className="container hero__inner">
-        <div className="hero__copy">
+        <motion.div
+          className="hero__copy"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        >
           <p className="hero__eyebrow">{profile.title}</p>
           <h1 className="hero__name">Building interfaces people trust.</h1>
           <p className="hero__location">{profile.location}</p>
@@ -52,10 +64,18 @@ export default function Hero() {
               View experience
             </a>
           </div>
-        </div>
-        <div className="hero__graphic-wrap" aria-hidden="true">
-          <HeroGraphic />
-        </div>
+        </motion.div>
+        <motion.div
+          className="hero__graphic-wrap"
+          aria-hidden="true"
+          initial={{ opacity: 0, scale: 0.92, y: 16 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <motion.div style={{ y: graphicY, rotate: graphicRotate }}>
+            <HeroGraphic />
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   )
