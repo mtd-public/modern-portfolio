@@ -6,6 +6,15 @@ export default function Skills() {
   return (
     <section id="skills" className="section skills">
       <div className="container">
+        <motion.p
+          className="section__eyebrow"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+        >
+          02 — Toolkit
+        </motion.p>
         <motion.h2
           className="section__heading"
           variants={fadeUp}

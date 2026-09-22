@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react'
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import DigitalRain from './DigitalRain.jsx'
+import ToyCanvas from './ToyCanvas.jsx'
+
+const loadLaptopScene = () => import('../three/scenes/laptop.js')
+const laptopPoster = `${import.meta.env.BASE_URL}renders/laptop.png`
 
 const MIN_SPIN_SCROLL_DISTANCE = 200
 // Rest/reduced-motion pose: open-faced but angled slightly left rather than
@@ -55,25 +59,7 @@ export default function Laptop3D({ targetRef }) {
   return (
     <div className="laptop3d-scene">
       <DigitalRain />
-      <motion.div className="laptop3d" style={{ rotateY }}>
-        <div className="laptop3d__screen">
-          <div className="laptop3d__screen-face laptop3d__screen-face--front">
-            <div className="laptop3d__display">
-              <div className="laptop3d__bar" />
-              <div className="laptop3d__line laptop3d__line--wide" />
-              <div className="laptop3d__line laptop3d__line--narrow" />
-            </div>
-          </div>
-          <div className="laptop3d__screen-face laptop3d__screen-face--back" />
-        </div>
-        <div className="laptop3d__hinge" />
-        <div className="laptop3d__base">
-          <div className="laptop3d__base-face laptop3d__base-face--front">
-            <div className="laptop3d__trackpad" />
-          </div>
-          <div className="laptop3d__base-face laptop3d__base-face--back" />
-        </div>
-      </motion.div>
+      <ToyCanvas className="laptop3d" load={loadLaptopScene} poster={laptopPoster} params={{ rotateY }} />
     </div>
   )
 }

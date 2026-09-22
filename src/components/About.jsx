@@ -11,6 +11,15 @@ export default function About() {
     <section id="about" className="section about" ref={sectionRef}>
       <div className="container about__inner">
         <div className="about__copy">
+          <motion.p
+            className="section__eyebrow"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewportOnce}
+          >
+            01 — Profile
+          </motion.p>
           <motion.h2
             className="section__heading"
             variants={fadeUp}
