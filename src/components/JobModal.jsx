@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import { themes } from '../data.js'
 import { CloseIcon, iconMap } from './icons.jsx'
+import { iconRenders } from '../renders.js'
 
 export default function JobModal({ job, onClose }) {
   const closeButtonRef = useRef(null)
@@ -28,6 +29,7 @@ export default function JobModal({ job, onClose }) {
 
   const theme = themes[job.theme] ?? themes.default
   const Icon = iconMap[job.icon]
+  const render = iconRenders[job.icon]
   const titleId = `job-modal-title-${job.id}`
 
   function handleOverlayClick(event) {
@@ -67,6 +69,7 @@ export default function JobModal({ job, onClose }) {
           className="job-modal__banner"
           style={{ background: `linear-gradient(120deg, ${theme.primaryDark}, ${theme.primary} 65%)` }}
         >
+          {render && <img className="job-modal__art" src={render} alt="" width="128" height="128" />}
           <div className="job-modal__company">
             {Icon && <Icon size={24} color="#ffffff" />}
             <span>{job.company}</span>

@@ -7,6 +7,7 @@ export default function Footer() {
         <p>
           &copy; {new Date().getFullYear()} {profile.name}. All rights reserved.
         </p>
+        <p className="site-footer__note">3D illustrations modelled in Blender, rendered with three.js.</p>
       </div>
     </footer>
   )

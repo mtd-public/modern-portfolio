@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { experience, themes } from '../data.js'
 import { ChevronRightIcon, iconMap } from './icons.jsx'
+import { iconRenders } from '../renders.js'
 import JobModal from './JobModal.jsx'
 import { fadeUp, viewportOnce } from '../motion.js'
 
@@ -39,6 +40,15 @@ export default function Experience() {
   return (
     <section id="experience" className="section experience">
       <div className="container">
+        <motion.p
+          className="section__eyebrow section__eyebrow--center"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+        >
+          03 — Career
+        </motion.p>
         <motion.h2
           className="section__heading section__heading--center"
           variants={fadeUp}
@@ -78,6 +88,7 @@ export default function Experience() {
             {displayedJobs.map((job) => {
               const theme = themes[job.theme] ?? themes.default
               const Icon = iconMap[job.icon]
+              const render = iconRenders[job.icon]
               return (
                 <motion.button
                   key={job.id}
@@ -88,8 +99,15 @@ export default function Experience() {
                   aria-haspopup="dialog"
                 >
                   <span className="job-card__main">
-                    <span className="job-card__icon" style={{ background: theme.primary }}>
-                      {Icon && <Icon size={24} color={theme.accent} />}
+                    <span
+                      className="job-card__icon"
+                      style={{ '--job-tint': theme.badgeBg, '--job-color': theme.primary }}
+                    >
+                      {render ? (
+                        <img src={render} alt="" width="52" height="52" loading="lazy" />
+                      ) : (
+                        Icon && <Icon size={24} color={theme.primary} />
+                      )}
                     </span>
                     <span className="job-card__text">
                       <span className="job-card__role">{job.role}</span>
@@ -106,7 +124,9 @@ export default function Experience() {
                       CURRENT
                     </span>
                   )}
-                  <ChevronRightIcon size={20} color="#413c56" />
+                  <span className="job-card__chevron">
+                    <ChevronRightIcon size={18} />
+                  </span>
                 </motion.button>
               )
             })}
